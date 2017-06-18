@@ -66,7 +66,7 @@ def answer2str(av, prefix=None):
         return '[{} Answer: {}]'.format(prefix, a_type(av))
 
 
-def ivisualize_iqa(img, q, a):
+def visualize_iqa(img, q, a):
     fig = plt.figure()
     plt.imshow(img)
     plt.title(question2str(q))

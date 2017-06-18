@@ -71,10 +71,10 @@ def generator(config):
 
     def generate_question(rep):
         # Generate questions: [# of shape * # of Q, # of color + # of Q]
-        Q = np.zeros((NUM_SHAPE*NUM_Q, NUM_COLOR+NUM_Q))
+        Q = np.zeros((NUM_SHAPE*NUM_Q, NUM_COLOR+NUM_Q), dtype=np.bool)
         for i in range(NUM_SHAPE):
             v = np.zeros(NUM_COLOR)
-            v[rep.color[i]] = 1
+            v[rep.color[i]] = True
             Q[i*NUM_Q:(i+1)*NUM_Q, :NUM_COLOR] = np.tile(v, (NUM_Q, 1))
             Q[i*NUM_Q:(i+1)*NUM_Q, NUM_COLOR:] = np.diag(np.ones(NUM_Q))
         return Q
@@ -82,34 +82,34 @@ def generator(config):
     def generate_answer(rep):
         # Generate answers: [# of shape * # of Q, # of color + 4]
         # # of color + 4: [color 1, color 2, ... , circle, rectangle, yes, no]
-        A = np.zeros((NUM_SHAPE*NUM_Q, NUM_COLOR+4))
+        A = np.zeros((NUM_SHAPE*NUM_Q, NUM_COLOR+4), dtype=np.bool)
         for i in range(NUM_SHAPE):
             # Q1: circle or rectangle?
             if rep.shape[i]:
-                A[i*NUM_Q, NUM_COLOR] = 1
+                A[i*NUM_Q, NUM_COLOR] = True
             else:
-                A[i*NUM_Q, NUM_COLOR+1] = 1
+                A[i*NUM_Q, NUM_COLOR+1] = True
 
             # Q2: lower?
             if rep.y[i] > int(img_size/2):
-                A[i*NUM_Q+1, NUM_COLOR+2] = 1
+                A[i*NUM_Q+1, NUM_COLOR+2] = True
             else:
-                A[i*NUM_Q+1, NUM_COLOR+3] = 1
+                A[i*NUM_Q+1, NUM_COLOR+3] = True
 
             # Q3: left?
             if rep.x[i] < int(img_size/2):
-                A[i*NUM_Q+2, NUM_COLOR+2] = 1
+                A[i*NUM_Q+2, NUM_COLOR+2] = True
             else:
-                A[i*NUM_Q+2, NUM_COLOR+3] = 1
+                A[i*NUM_Q+2, NUM_COLOR+3] = True
 
             distance = 1.1*(rep.y - rep.y[i]) ** 2 + (rep.x - rep.x[i]) ** 2
             idx = distance.argsort()
             # Q4: the color of the nearest object
             min_idx = idx[1]
-            A[i*NUM_Q+3, rep.color[min_idx]] = 1
+            A[i*NUM_Q+3, rep.color[min_idx]] = True
             # Q5: the color of the farest object
             max_idx = idx[-1]
-            A[i*NUM_Q+4, rep.color[max_idx]] = 1
+            A[i*NUM_Q+4, rep.color[max_idx]] = True
         return A
 
     # output files
@@ -141,7 +141,8 @@ def generator(config):
                 bar.finish()
                 f.close()
                 id_file.close()
-                log.info('Dataset generated.')
+                log.info('Dataset generated under {} with {} samples.'
+                         .format(dir_name, dataset_size))
                 return
 
 
