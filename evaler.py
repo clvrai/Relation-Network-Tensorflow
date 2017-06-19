@@ -51,11 +51,11 @@ class EvalManager(object):
                         correct_prediction_nr += 1
 
         avg_nr = float(correct_prediction_nr)/count_nr
-        log.infov("Average accuracy of non-relational questions: %.4f", avg_nr*100)
+        log.infov("Average accuracy of non-relational questions: {}%".format(avg_nr*100))
         avg_r = float(correct_prediction_r)/count_r
-        log.infov("Average accuracy of relational questions: %.4f", avg_r*100)
+        log.infov("Average accuracy of relational questions: {}%".format(avg_r*100))
         avg = float(correct_prediction_r+correct_prediction_nr)/(count_r+count_nr)
-        log.infov("Average accuracy: %.4f", avg*100)
+        log.infov("Average accuracy: {}%".format(avg*100))
 
 
 class Evaler(object):

@@ -83,7 +83,7 @@ class Trainer(object):
         self.summary_op = tf.summary.merge_all()
         self.plot_summary_op = tf.summary.merge_all(key='plot_summaries')
 
-        self.saver = tf.train.Saver(max_to_keep=100)
+        self.saver = tf.train.Saver(max_to_keep=1000)
         self.summary_writer = tf.summary.FileWriter(self.train_dir)
 
         self.checkpoint_secs = 600  # 10 min
@@ -118,7 +118,7 @@ class Trainer(object):
         log.infov("Training Starts!")
         pprint(self.batch_train)
 
-        max_steps = 1000000
+        max_steps = 200000
 
         output_save_step = 1000
 
@@ -210,7 +210,7 @@ def main():
     parser.add_argument('--prefix', type=str, default='default')
     parser.add_argument('--checkpoint', type=str, default=None)
     parser.add_argument('--dataset_path', type=str, default='Sort-of-CLEVR_default')
-    parser.add_argument('--learning_rate', type=float, default=1e-4)
+    parser.add_argument('--learning_rate', type=float, default=2.5e-4)
     parser.add_argument('--lr_weight_decay', action='store_true', default=False)
     config = parser.parse_args()
 
