@@ -1,19 +1,50 @@
 # Relation Networks and Sort-of-CLEVR in Tensorflow
 
 ## Descriptions
-This project includes a [Tensorflow](https://www.tensorflow.org/) implementation of Relation Networks and a synthetic VQA dataset named Sort-of-CLEVR proposed in the paper [A Simple Neural Network Module for Relational Reasoning](https://arxiv.org/abs/1706.01427).
+This project includes a [Tensorflow](https://www.tensorflow.org/) implementation of **Relation Networks** and a synthetic VQA dataset named Sort-of-CLEVR proposed in the paper [A Simple Neural Network Module for Relational Reasoning](https://arxiv.org/abs/1706.01427).
 
 ### Relation Networks
 
-[[Placeholder: the intro of RNs]]
+Relational reasoning is an essential component of intelligent systems. Motivated by this goal Relation Networks (RNs) are proposed to solve problems hinging on inherently relational concepts. To be more specific, RN is a composite function:
 
-<img src="figure/RN.png" height="450"/>
+<img src="figure/rn_eq.png" height="50"/>,
+
+where *o* represents inidividual object while *f* and *g* are functions dealing with relational reasoning which are implemented as MLPs. Note that objects here are necessary to be real objects; instead, they could consist of the background, particular physical objects, textures, conjunctions of physical objects, etc. In the implementation, objects are defined by the convoluted features. The model architecture proposed to solve Visual Question Answering (VQA) problems in the paper is as follows.
+
+<img src="figure/RN.png" height="350"/>
+
+In addition to implementing the RN model, **a baseline model** which consists of convolutional layers followed by MLPs is also provided in this implementation. 
 
 ### Sort-of-CLEVR
 
-[[Placeholder: the intro of the dataset]]
+To verify the effectiveness of RNs, a synthesized **VQA dataset** is proposed which is named Sort-of-CLEVR. The dataset consists of paired questions and answers as well as images including colorful shapes. 
 
-Note that this implementation only follows the main idea of the original paper while differing a lot in implementation details such as model architectures, hyperparameters, applied optimizer, etc. Also, the design of Sort-of-CLEVR only follows the high level ideas of the one proposed in the orginal paper.
+Each **image** has a number of shapes (rectangle or circle) which have different colors (red, blue, green, yellow, cyan,  or magenta). Here are some examples of images.
+
+<img src="figure/samples.png" width="800"/>
+
+**Questions** are separated into relational and non-relational questions which are encoded as binary strings to prevent the effect of language parsing and embedding; while **answers** are represents as one-hot vectors. Examples of images, questions and answers are as follow.
+
+<img src="figure/iqa.png" width="800"/>
+
+Given a queried color, all the possible questions are as follows.
+
+**Non-relational questions**
+
+* Is it a circle or a rectangle?
+* Is it closer to the bottom of the image?
+* Is it on the left of the image?
+
+**Relational questions**
+
+* The color of the nearest object?
+* The color of the farthest object?
+
+And the possible answer is a fixed length vector whose elements represent
+
+*[red, blue, green, yellow, cyan, magenta, circle, rectangle, yes, no]*
+
+Note that this implementation only follows the main idea of the original paper while differing a lot in implementation details such as model architectures, hyperparameters, applied optimizer, etc. Also, the design of Sort-of-CLEVR only follows the high-level ideas of the one proposed in the orginal paper.
 
 \*This code is still being developed and subject to change.
 
@@ -21,7 +52,7 @@ Note that this implementation only follows the main idea of the original paper w
 
 - Python 2.7 or Python 3.3+
 - [Tensorflow 1.0.0](https://github.com/tensorflow/tensorflow/tree/r1.0)
-- [Tensorflow Plot](https://github.com/wookayin/tensorflow-plot)
+- [Tensorflow Plot](https://github.com/wookayin/tensorflow-plot) (optional)
 - [SciPy](http://www.scipy.org/install.html)
 - [NumPy](http://www.numpy.org/)
 
@@ -29,13 +60,102 @@ Note that this implementation only follows the main idea of the original paper w
 
 ### Datasets
 
+Generate a default Sort-of-CLEVR dataset:
+
+```
+$ python generator.py
+```
+
+Or generate your own Sort-of-CLEVR dataset by specifying args:
+
+```
+$ python generator.py --dataset_size 12345 --img_size 256
+```
+
+Or you can even change the number of shape presented in the images, the number of possible colors, types of questions and answers by configuring the file *qa_util.py*.
+
 ### Training
+
+Train a RN model with a default Sort-of-CLEVR dataset:
+
+```
+$ python trainer.py
+```
+
+Or specify your own settings:
+
+```
+$ python trainer.py --model baseline --dataset_path Sort-of-CLEVR_xyz --batch_size 64 --learning_rate 1e-4 --lr_weight_decay 
+```
 
 ### Testing
 
+Test a trained model by specifying the dataset and the model used for training and a checkpoint:
+
+```
+$ python evaler.py --dataset_path Sort-of-CLEVR_default --model rn --checkpoint_path ckpt_dir
+```
+
+Please note that *ckpt_dir* should be like: ```train_dir/baseline-Sort-of-CLEVR_default_lr_0.001-20170619-040301/model-10001```
+
 ## Results
 
+Both the baseline model and the RN model were tested on three Sort-of-CLEVR datasets having 2, 4, or 6 number of shapes in each image, respectively. 
+
+### Training
+
+**RN model accuracy**
+
+<img src="figure/result/rn_accuracy.png" height="200"/>
+
+**RN model loss**
+
+<img src="figure/result/rn_loss.png" height="200"/>
+
+**Baseline model accuracy**
+
+<img src="figure/result/baseline_accuracy.png" height="200"/>
+
+**Baseline model loss**
+
+<img src="figure/result/baseline_loss.png" height="200"/>
+
+
+
+### Testing
+
+**Each image has 6 shapes**
+
+```
+| | RN model | Baseline model |
+| --- | --- | --- |
+| Non-relational question | 99% | 81.00% |
+| Relational question | 89% | 29.58% |
+| Overall | 89% | 60.49% |
+```
+
+**Each image has 4 shapes**
+
+```
+| | RN model | Baseline model |
+| --- | --- | --- |
+| Non-relational question | 97.64% | 79.86% |
+| Relational question | 73.78% | 45.56% |
+| Overall | 88.10% | 66.10% |
+```
+
+**Each image has 2 shapes**
+
+```
+| | RN model | Baseline model |
+| --- | --- | --- |
+| Non-relational question | 99% | 85.48% |
+| Relational question | 89% | 35.74% |
+| Overall | 89% | 65.65% |
+```
+
 ## Related works
+
 * [A Simple Neural Network Module for Relational Reasoning](https://arxiv.org/abs/1706.01427) by 
 * [Visual Interaction Networks](https://arxiv.org/abs/1706.01433) by Watters et. al.
 * [Interaction networks for learning about objects, relations and physics](https://arxiv.org/abs/1612.00222) by Battaglia et. al.
@@ -45,5 +165,3 @@ Note that this implementation only follows the main idea of the original paper w
 ## Author
 
 Shao-Hua Sun / [@shaohua0116](https://shaohua0116.github.io/) @ [Joseph Lim's research lab](https://github.com/gitlimlab) @ USC
-
-## Acknowledgement
