@@ -146,8 +146,9 @@ class Model(object):
                 return fc_3
 
         g = CONV(self.img, self.q, scope='CONV')
-        self.all_preds = f_phi(g, scope='f_phi')
-        self.loss, self.accuracy = build_loss(self.all_preds, self.a)
+        logits = f_phi(g, scope='f_phi')
+        self.all_preds = tf.nn.softmax(logits)
+        self.loss, self.accuracy = build_loss(logits, self.a)
 
         # Add summaries
         def draw_iqa(img, q, target_a, pred_a):

@@ -99,8 +99,9 @@ class Model(object):
                 print('{} {}'.format(scope.name, fc_3))
                 return fc_3
 
-        self.all_preds = C(self.img, self.q, scope='Classifier')
-        self.loss, self.accuracy = build_loss(self.all_preds, self.a)
+        logits = C(self.img, self.q, scope='Classifier')
+        self.all_preds = tf.nn.softmax(logits)
+        self.loss, self.accuracy = build_loss(logits, self.a)
 
         # Add summaries
         def draw_iqa(img, q, target_a, pred_a):

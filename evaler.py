@@ -13,7 +13,7 @@ import os
 import time
 import numpy as np
 import tensorflow as tf
-import h5py
+
 
 class EvalManager(object):
     def __init__(self):
@@ -183,12 +183,14 @@ class Evaler(object):
                          )
                )
 
+
 def check_data_path(path):
     if os.path.isfile(os.path.join(path, 'data.hy')) \
            and os.path.isfile(os.path.join(path, 'id.txt')):
         return True
     else:
         return False
+
 
 def main():
     import argparse
@@ -204,7 +206,7 @@ def main():
     path = os.path.join('./datasets', config.dataset_path)
 
     if check_data_path(path):
-        import  sort_of_clevr as dataset
+        import sort_of_clevr as dataset
     else:
         raise ValueError(path)
 
