@@ -1,0 +1,9 @@
+train_dir/
+datasets/
+.ropeproject
+qa_sample/
+*.py[cod]
+*.sw[op]
+*.hy
+*.txt
+*.gz
