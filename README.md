@@ -104,25 +104,25 @@ Both the baseline model and the RN model were tested on three Sort-of-CLEVR data
 
 ### Training
 
-**RN model accuracy**
+RN model accuracy
 
 <img src="figure/result/rn_accuracy.png" height="200"/>
 
-**RN model loss**
+RN model loss
 
 <img src="figure/result/rn_loss.png" height="200"/>
 
-**Baseline model accuracy**
+Baseline model accuracy
 
 <img src="figure/result/baseline_accuracy.png" height="200"/>
 
-**Baseline model loss**
+Baseline model loss
 
 <img src="figure/result/baseline_loss.png" height="200"/>
 
 ### Testing
 
-**Each image has 6 shapes**
+Each image has 6 shapes
 
 | | RN model | Baseline model |
 | --- | --- | --- |
@@ -130,7 +130,7 @@ Both the baseline model and the RN model were tested on three Sort-of-CLEVR data
 | Relational question | **70.93%** | 32.93% |
 | Overall | **83.51%** | 54.19% |
 
-**Each image has 4 shapes**
+Each image has 4 shapes
 
 | | RN model | Baseline model |
 | --- | --- | --- |
@@ -138,7 +138,7 @@ Both the baseline model and the RN model were tested on three Sort-of-CLEVR data
 | Relational question | **73.78%** | 45.56% |
 | Overall | **88.10%** | 66.10% |
 
-**Each image has 2 shapes**
+Each image has 2 shapes
 
 | | RN model | Baseline model |
 | --- | --- | --- |
@@ -148,7 +148,7 @@ Both the baseline model and the RN model were tested on three Sort-of-CLEVR data
 
 ### Can learned knowledge be transferred?
 
-**Models trained on 4-shape dataset and tested on 6-shape dataset**
+Models trained on 4-shape dataset and tested on 6-shape dataset
 
 | | RN model | Baseline model |
 | --- | --- | --- |
@@ -156,7 +156,7 @@ Both the baseline model and the RN model were tested on three Sort-of-CLEVR data
 | Relational question | **55.07%** | 29.63% |
 | Overall | **79.95%** | 60.19% |
 
-**Models trained on 4-shape dataset and tested on 2-shape dataset**
+Models trained on 4-shape dataset and tested on 2-shape dataset
 
 | | RN model | Baseline model |
 | --- | --- | --- |
