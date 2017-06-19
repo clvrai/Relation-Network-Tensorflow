@@ -1,7 +1,7 @@
 # Relation Networks and Sort-of-CLEVR in Tensorflow
 
 ## Descriptions
-This project includes a [Tensorflow](https://www.tensorflow.org/) implementation of **Relation Networks** and a synthetic VQA dataset named Sort-of-CLEVR proposed in the paper [A Simple Neural Network Module for Relational Reasoning](https://arxiv.org/abs/1706.01427).
+This project includes a [Tensorflow](https://www.tensorflow.org/) implementation of **Relation Networks** and a synthetic VQA dataset named **Sort-of-CLEVR** proposed in the paper [A Simple Neural Network Module for Relational Reasoning](https://arxiv.org/abs/1706.01427).
 
 ### Relation Networks
 
