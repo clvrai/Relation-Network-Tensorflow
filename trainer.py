@@ -81,7 +81,10 @@ class Trainer(object):
         )
 
         self.summary_op = tf.summary.merge_all()
-        self.plot_summary_op = tf.summary.merge_all(key='plot_summaries')
+        try:
+            self.plot_summary_op = tf.summary.merge_all(key='plot_summaries')
+        except:
+            pass
 
         self.saver = tf.train.Saver(max_to_keep=1000)
         self.summary_writer = tf.summary.FileWriter(self.train_dir)
@@ -149,8 +152,11 @@ class Trainer(object):
         fetch = [self.global_step, self.model.accuracy, self.summary_op,
                  self.model.loss, self.check_op, self.optimizer]
 
-        if step is not None and (step % 100 == 0):
-            fetch += [self.plot_summary_op]
+        try:
+            if step is not None and (step % 100 == 0):
+                fetch += [self.plot_summary_op]
+        except:
+            pass
 
         fetch_values = self.session.run(
             fetch, feed_dict=self.model.get_feed_dict(batch_chunk, step=step)

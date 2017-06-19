@@ -4,7 +4,10 @@ from __future__ import print_function
 
 import tensorflow as tf
 import tensorflow.contrib.slim as slim
-import tfplot
+try:
+    import tfplot
+except:
+    pass
 
 from ops import conv2d, fc
 from util import log
@@ -107,10 +110,13 @@ class Model(object):
             ax.set_xlabel(answer2str(target_a)+answer2str(pred_a, 'Predicted'))
             return fig
 
-        tfplot.summary.plot_many('IQA/',
-                                 draw_iqa, [self.img, self.q, self.a, self.all_preds],
-                                 max_outputs=3,
-                                 collections=["plot_summaries"])
+        try:
+            tfplot.summary.plot_many('IQA/',
+                                     draw_iqa, [self.img, self.q, self.a, self.all_preds],
+                                     max_outputs=3,
+                                     collections=["plot_summaries"])
+        except:
+            pass
 
         tf.summary.scalar("loss/accuracy", self.accuracy)
         tf.summary.scalar("loss/cross_entropy", self.loss)
