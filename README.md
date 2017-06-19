@@ -153,7 +153,7 @@ Both the baseline model and the RN model were tested on three Sort-of-CLEVR data
 | | RN model | Baseline model |
 | --- | --- | --- |
 | Non-relational question | **96.51%** | 80.57% |
-| Relational question | **55.07** | 29.63% |
+| Relational question | **55.07%** | 29.63% |
 | Overall | **79.95%** | 60.19% |
 
 **Models trained on 4-shape dataset and tested on 2-shape dataset**
