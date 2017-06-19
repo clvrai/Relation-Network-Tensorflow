@@ -13,17 +13,17 @@ where *o* represents inidividual object while *f* and *g* are functions dealing 
 
 <img src="figure/RN.png" height="350"/>
 
-In addition to implementing the RN model, **a baseline model** which consists of convolutional layers followed by MLPs is also provided in this implementation. 
+In addition to the RN model, **a baseline model** which consists of convolutional layers followed by MLPs is also provided in this implementation. 
 
 ### Sort-of-CLEVR
 
-To verify the effectiveness of RNs, a synthesized **VQA dataset** is proposed which is named Sort-of-CLEVR. The dataset consists of paired questions and answers as well as images including colorful shapes. 
+To verify the effectiveness of RNs, a synthesized **VQA dataset** is proposed in the paper named Sort-of-CLEVR. The dataset consists of paired questions and answers as well as images containing colorful shapes. 
 
 Each **image** has a number of shapes (rectangle or circle) which have different colors (red, blue, green, yellow, cyan,  or magenta). Here are some examples of images.
 
 <img src="figure/samples.png" width="720"/>
 
-**Questions** are separated into relational and non-relational questions which are encoded as binary strings to prevent the effect of language parsing and embedding; while **answers** are represents as one-hot vectors. Examples of images, questions and answers are as follow.
+**Questions** are separated into relational and non-relational questions which are encoded as binary strings to prevent the effect of language parsing and embedding; while **answers** are represented as one-hot vectors. Examples of images, questions and answers are as follow.
 
 <img src="figure/iqa.png" width="850"/>
 
@@ -126,9 +126,9 @@ Both the baseline model and the RN model were tested on three Sort-of-CLEVR data
 
 | | RN model | Baseline model |
 | --- | --- | --- |
-| Non-relational question | **93.24%** | 81.00% |
-| Relational question | **70.93%** | 29.58% |
-| Overall | **83.51%** | 60.49% |
+| Non-relational question | **93.24%** | 68.37% |
+| Relational question | **70.93%** | 32.93% |
+| Overall | **83.51%** | 54.19% |
 
 **Each image has 4 shapes**
 
@@ -142,9 +142,27 @@ Both the baseline model and the RN model were tested on three Sort-of-CLEVR data
 
 | | RN model | Baseline model |
 | --- | --- | --- |
-| Non-relational question | **95.67%** | 85.48% |
-| Relational question | **79.01%** | 35.74% |
-| Overall | **90.31%** | 65.65% |
+| Non-relational question | **99.76%** | 98.22% |
+| Relational question | **100.00%** | 100.00% |
+| Overall | **99.85%** | 98.93% |
+
+### Can learned knowledge be transferred?
+
+**Models trained on 4-shape dataset and tested on 6-shape dataset**
+
+| | RN model | Baseline model |
+| --- | --- | --- |
+| Non-relational question | **96.51%** | 80.57% |
+| Relational question | **55.07** | 29.63% |
+| Overall | **79.95%** | 60.19% |
+
+**Models trained on 4-shape dataset and tested on 2-shape dataset**
+
+| | RN model | Baseline model |
+| --- | --- | --- |
+| Non-relational question | **94.71%** | 91.47% |
+| Relational question | 49.88% | **57.58%** |
+| Overall | 76.73% | **77.95%** |
 
 ## Related works
 
