@@ -126,7 +126,7 @@ Both the baseline model and the RN model were tested on three Sort-of-CLEVR data
 
 **Each image has 6 shapes**
 
-| 6 shapes | RN model | Baseline model |
+| | RN model | Baseline model |
 | --- | --- | --- |
 | Non-relational question | 99% | 81.00% |
 | Relational question | 89% | 29.58% |
@@ -134,7 +134,7 @@ Both the baseline model and the RN model were tested on three Sort-of-CLEVR data
 
 **Each image has 4 shapes**
 
-| 4 shapes | RN model | Baseline model |
+| | RN model | Baseline model |
 | --- | --- | --- |
 | Non-relational question | 97.64% | 79.86% |
 | Relational question | 73.78% | 45.56% |
@@ -142,7 +142,7 @@ Both the baseline model and the RN model were tested on three Sort-of-CLEVR data
 
 **Each image has 2 shapes**
 
-| 2 shapes | RN model | Baseline model |
+| | RN model | Baseline model |
 | --- | --- | --- |
 | Non-relational question | 99% | 85.48% |
 | Relational question | 89% | 35.74% |
