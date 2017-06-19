@@ -62,13 +62,13 @@ Note that this implementation only follows the main idea of the original paper w
 
 Generate a default Sort-of-CLEVR dataset:
 
-```
+```bash
 $ python generator.py
 ```
 
 Or generate your own Sort-of-CLEVR dataset by specifying args:
 
-```
+```bash
 $ python generator.py --dataset_size 12345 --img_size 256
 ```
 
@@ -78,13 +78,13 @@ Or you can even change the number of shape presented in the images, the number o
 
 Train a RN model with a default Sort-of-CLEVR dataset:
 
-```
+```bash
 $ python trainer.py
 ```
 
 Or specify your own settings:
 
-```
+```bash
 $ python trainer.py --model baseline --dataset_path Sort-of-CLEVR_xyz --batch_size 64 --learning_rate 1e-4 --lr_weight_decay 
 ```
 
@@ -92,7 +92,7 @@ $ python trainer.py --model baseline --dataset_path Sort-of-CLEVR_xyz --batch_si
 
 Test a trained model by specifying the dataset and the model used for training and a checkpoint:
 
-```
+```bash
 $ python evaler.py --dataset_path Sort-of-CLEVR_default --model rn --checkpoint_path ckpt_dir
 ```
 
@@ -120,17 +120,15 @@ Both the baseline model and the RN model were tested on three Sort-of-CLEVR data
 
 <img src="figure/result/baseline_loss.png" height="200"/>
 
-
-
 ### Testing
 
 **Each image has 6 shapes**
 
 | | RN model | Baseline model |
 | --- | --- | --- |
-| Non-relational question | 99% | 81.00% |
-| Relational question | 89% | 29.58% |
-| Overall | 89% | 60.49% |
+| Non-relational question | 93.24% | 81.00% |
+| Relational question | 70.93% | 29.58% |
+| Overall | 83.51% | 60.49% |
 
 **Each image has 4 shapes**
 
@@ -144,9 +142,9 @@ Both the baseline model and the RN model were tested on three Sort-of-CLEVR data
 
 | | RN model | Baseline model |
 | --- | --- | --- |
-| Non-relational question | 99% | 85.48% |
-| Relational question | 89% | 35.74% |
-| Overall | 89% | 65.65% |
+| Non-relational question | 95.67% | 85.48% |
+| Relational question | 79.01% | 35.74% |
+| Overall | 90.31% | 65.65% |
 
 ## Related works
 
