@@ -37,7 +37,7 @@ def question2str(qv):
             1: 'is it closer to the bottom of the image?',
             2: 'is it on the left of the image?',
             3: 'the color of the nearest object?',
-            4: 'the color of the farest object?',
+            4: 'the color of the farthest object?',
         }[q]
     color = np.argmax(qv[:NUM_COLOR])
     q_num = np.argmax(qv[NUM_COLOR:])
