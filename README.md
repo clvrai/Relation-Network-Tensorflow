@@ -7,7 +7,7 @@ This project includes a [Tensorflow](https://www.tensorflow.org/) implementation
 
 Relational reasoning is an essential component of intelligent systems. Motivated by this goal Relation Networks (RNs) are proposed to solve problems hinging on inherently relational concepts. To be more specific, RN is a composite function:
 
-<img src="figure/rn_eq.png" height="50"/>,
+<img src="figure/rn_eq.png" height="72"/>,
 
 where *o* represents inidividual object while *f* and *g* are functions dealing with relational reasoning which are implemented as MLPs. Note that objects here are necessary to be real objects; instead, they could consist of the background, particular physical objects, textures, conjunctions of physical objects, etc. In the implementation, objects are defined by the convoluted features. The model architecture proposed to solve Visual Question Answering (VQA) problems in the paper is as follows.
 
@@ -21,11 +21,11 @@ To verify the effectiveness of RNs, a synthesized **VQA dataset** is proposed wh
 
 Each **image** has a number of shapes (rectangle or circle) which have different colors (red, blue, green, yellow, cyan,  or magenta). Here are some examples of images.
 
-<img src="figure/samples.png" width="800"/>
+<img src="figure/samples.png" width="720"/>
 
 **Questions** are separated into relational and non-relational questions which are encoded as binary strings to prevent the effect of language parsing and embedding; while **answers** are represents as one-hot vectors. Examples of images, questions and answers are as follow.
 
-<img src="figure/iqa.png" width="800"/>
+<img src="figure/iqa.png" width="850"/>
 
 Given a queried color, all the possible questions are as follows.
 
@@ -127,7 +127,7 @@ Both the baseline model and the RN model were tested on three Sort-of-CLEVR data
 **Each image has 6 shapes**
 
 ```
-| | RN model | Baseline model |
+| 6 shapes | RN model | Baseline model |
 | --- | --- | --- |
 | Non-relational question | 99% | 81.00% |
 | Relational question | 89% | 29.58% |
@@ -137,7 +137,7 @@ Both the baseline model and the RN model were tested on three Sort-of-CLEVR data
 **Each image has 4 shapes**
 
 ```
-| | RN model | Baseline model |
+| 4 shapes | RN model | Baseline model |
 | --- | --- | --- |
 | Non-relational question | 97.64% | 79.86% |
 | Relational question | 73.78% | 45.56% |
@@ -147,7 +147,7 @@ Both the baseline model and the RN model were tested on three Sort-of-CLEVR data
 **Each image has 2 shapes**
 
 ```
-| | RN model | Baseline model |
+| 2 shapes | RN model | Baseline model |
 | --- | --- | --- |
 | Non-relational question | 99% | 85.48% |
 | Relational question | 89% | 35.74% |
