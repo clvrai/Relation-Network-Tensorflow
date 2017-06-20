@@ -100,6 +100,12 @@ Or specify your own settings:
 $ python trainer.py --model baseline --dataset_path Sort-of-CLEVR_xyz --batch_size 64 --learning_rate 1e-4 --lr_weight_decay 
 ```
 
+During the training phase, the samples including images, questions, ground truth answers, and predicted answers can be monitored on Tensorboard if the library [Tensorflow Plot](https://github.com/wookayin/tensorflow-plot) is installed. Here is an example.
+
+<p align="center">
+    <img src="figure/plot_summary.png" width="400"/>
+</p>
+
 ### Testing
 
 Test a trained model by specifying the dataset and the model used for training and a checkpoint:
