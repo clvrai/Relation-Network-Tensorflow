@@ -2,14 +2,14 @@
 
 As part of the implementation series of [Joseph Lim's group at USC](http://csail.mit.edu/~lim), our motivation is to accelerate (or sometimes delay) research in the AI community by promoting open-source projects. To this end, we implement state-of-the-art research papers, and publicly share them with concise reports. Please visit our [group github site](https://github.com/gitlimlab) for other projects.
 
-This project is implemented by [Shao-Hua Sun](https://github.com/shaohua0116/).
+This project is implemented by [Shao-Hua Sun](https://github.com/shaohua0121/).
 
 ## Descriptions
-This project includes a [Tensorflow](https://www.tensorflow.org/) implementation of **Relation Networks** and a synthetic VQA dataset named **Sort-of-CLEVR** proposed in the paper [A Simple Neural Network Module for Relational Reasoning](https://arxiv.org/abs/1706.01427).
+This project includes a [Tensorflow](https://www.tensorflow.org/) implementation of **Relation Networks** and a dataset generator which generates a synthetic VQA dataset named **Sort-of-CLEVR** proposed in the paper [A Simple Neural Network Module for Relational Reasoning](https://arxiv.org/abs/1706.01427).
 
 ### Relation Networks
 
-Relational reasoning is an essential component of intelligent systems. Motivated by this goal Relation Networks (RNs) are proposed to solve problems hinging on inherently relational concepts. To be more specific, RN is a composite function:
+Relational reasoning is an essential component of intelligent systems. To this end, Relation Networks (RNs) are proposed to solve problems hinging on inherently relational concepts. To be more specific, RN is a composite function:
 
 <p align="center">
     <img src="figure/rn_eq.png" height="72"/>,
@@ -56,6 +56,10 @@ And the possible answer is a fixed length one-hot vector whose elements represen
 
 *[red, blue, green, yellow, cyan, magenta, circle, rectangle, yes, no]*
 
+**File format**
+
+Generated files use HDF5 file format. Each data point comtains an *image*, an one-hot vector *q* encdoing a question, and an one-hot vector *a* encoding the corresponding answer.
+
 Note that this implementation only follows the main idea of the original paper while differing a lot in implementation details such as model architectures, hyperparameters, applied optimizer, etc. Also, the design of Sort-of-CLEVR only follows the high-level ideas of the one proposed in the orginal paper.
 
 \*This code is still being developed and subject to change.
@@ -64,9 +68,9 @@ Note that this implementation only follows the main idea of the original paper w
 
 - Python 2.7 or Python 3.3+
 - [Tensorflow 1.0.0](https://github.com/tensorflow/tensorflow/tree/r1.0)
-- [Tensorflow Plot](https://github.com/wookayin/tensorflow-plot) (optional)
-- [SciPy](http://www.scipy.org/install.html)
 - [NumPy](http://www.numpy.org/)
+- [h5py](http://docs.h5py.org/en/latest/)
+- [progressbar](http://progressbar-2.readthedocs.io/en/latest/index.html)
 
 ## Usage
 
@@ -118,7 +122,7 @@ Please note that *ckpt_dir* should be like: ```train_dir/baseline-Sort-of-CLEVR_
 
 ## Results
 
-Both the baseline model and the RN model were tested on three Sort-of-CLEVR datasets having 2, 4, or 6 number of shapes in each image, respectively. 
+Both **the baseline model** and **the RN model** were tested on **three Sort-of-CLEVR datasets** which have 2, 4, or 6 shapes in each image, respectively. 
 
 ### Training
 
@@ -153,8 +157,8 @@ Each image has 4 shapes
 | | RN model | Baseline model |
 | --- | --- | --- |
 | Non-relational question | **97.64%** | 79.86% |
-| Relational question | **73.78%** | 45.56% |
-| Overall | **88.10%** | 66.10% |
+| Relational question | **75.78%** | 45.56% |
+| Overall | **93.10%** | 66.10% |
 
 Each image has 2 shapes
 
