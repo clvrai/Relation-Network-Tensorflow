@@ -2,7 +2,7 @@
 
 As part of the implementation series of [Joseph Lim's group at USC](http://csail.mit.edu/~lim), our motivation is to accelerate (or sometimes delay) research in the AI community by promoting open-source projects. To this end, we implement state-of-the-art research papers, and publicly share them with concise reports. Please visit our [group github site](https://github.com/gitlimlab) for other projects.
 
-This project is implemented by [Shao-Hua Sun](http://shaohua0116.github.io).
+This project is implemented by [Shao-Hua Sun](https://github.com/shaohua0116/).
 
 ## Descriptions
 This project includes a [Tensorflow](https://www.tensorflow.org/) implementation of **Relation Networks** and a synthetic VQA dataset named **Sort-of-CLEVR** proposed in the paper [A Simple Neural Network Module for Relational Reasoning](https://arxiv.org/abs/1706.01427).
@@ -11,11 +11,11 @@ This project includes a [Tensorflow](https://www.tensorflow.org/) implementation
 
 Relational reasoning is an essential component of intelligent systems. Motivated by this goal Relation Networks (RNs) are proposed to solve problems hinging on inherently relational concepts. To be more specific, RN is a composite function:
 
-<img src="figure/rn_eq.png" height="72"/>,
+<img src="figure/rn_eq.png" height="72" align="middle"/>,
 
-where *o* represents inidividual object while *f* and *g* are functions dealing with relational reasoning which are implemented as MLPs. Note that objects here are necessary to be real objects; instead, they could consist of the background, particular physical objects, textures, conjunctions of physical objects, etc. In the implementation, objects are defined by the convoluted features. The model architecture proposed to solve Visual Question Answering (VQA) problems in the paper is as follows.
+where *o* represents inidividual object while *f* and *g* are functions dealing with relational reasoning which are implemented as MLPs. Note that objects mentioned here are not necessary to be real objects; instead, they could consist of the background, particular physical objects, textures, conjunctions of physical objects, etc. In the implementation, objects are defined by convoluted features. The model architecture proposed to solve Visual Question Answering (VQA) problems is as follows.
 
-<img src="figure/RN.png" height="350"/>
+<img src="figure/RN.png" height="350" align="middle"/>
 
 In addition to the RN model, **a baseline model** which consists of convolutional layers followed by MLPs is also provided in this implementation. 
 
@@ -25,11 +25,11 @@ To verify the effectiveness of RNs, a synthesized **VQA dataset** is proposed in
 
 Each **image** has a number of shapes (rectangle or circle) which have different colors (red, blue, green, yellow, cyan,  or magenta). Here are some examples of images.
 
-<img src="figure/samples.png" width="720"/>
+<img src="figure/samples.png" width="720" align="middle"/>
 
 **Questions** are separated into relational and non-relational questions which are encoded as binary strings to prevent the effect of language parsing and embedding; while **answers** are represented as one-hot vectors. Examples of images, questions and answers are as follow.
 
-<img src="figure/iqa.png" width="850"/>
+<img src="figure/iqa.png" width="850" align="middle"/>
 
 Given a queried color, all the possible questions are as follows.
 
@@ -44,7 +44,7 @@ Given a queried color, all the possible questions are as follows.
 * The color of the nearest object?
 * The color of the farthest object?
 
-And the possible answer is a fixed length vector whose elements represent
+And the possible answer is a fixed length one-hot vector whose elements represent
 
 *[red, blue, green, yellow, cyan, magenta, circle, rectangle, yes, no]*
 
@@ -178,4 +178,4 @@ Models trained on 4-shape dataset and tested on 2-shape dataset
 
 ## Author
 
-Shao-Hua Sun / [@shaohua0116](https://shaohua0116.github.io/) @ [Joseph Lim's research lab](https://github.com/gitlimlab) @ USC
+Shao-Hua Sun / [@shaohua0116](https://github.com/shaohua0116/) @ [Joseph Lim's research lab](https://github.com/gitlimlab) @ USC
