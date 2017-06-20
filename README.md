@@ -58,7 +58,7 @@ And the possible answer is a fixed length one-hot vector whose elements represen
 
 **File format**
 
-Generated files use HDF5 file format. Each data point comtains an *image*, an one-hot vector *q* encdoing a question, and an one-hot vector *a* encoding the corresponding answer.
+Generated files use HDF5 file format. Each data point contains an *image*, an one-hot vector *q* encoding a question, and an one-hot vector *a* encoding the corresponding answer.
 
 Note that this implementation only follows the main idea of the original paper while differing a lot in implementation details such as model architectures, hyperparameters, applied optimizer, etc. Also, the design of Sort-of-CLEVR only follows the high-level ideas of the one proposed in the orginal paper.
 
@@ -69,8 +69,11 @@ Note that this implementation only follows the main idea of the original paper w
 - Python 2.7 or Python 3.3+
 - [Tensorflow 1.0.0](https://github.com/tensorflow/tensorflow/tree/r1.0)
 - [NumPy](http://www.numpy.org/)
+- [PIL](http://pillow.readthedocs.io/en/3.1.x/installation.html)
+- [matplotlib](https://matplotlib.org/)
 - [h5py](http://docs.h5py.org/en/latest/)
 - [progressbar](http://progressbar-2.readthedocs.io/en/latest/index.html)
+- [colorlog](https://github.com/borntyping/python-colorlog)
 
 ## Usage
 

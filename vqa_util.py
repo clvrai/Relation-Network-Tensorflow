@@ -11,10 +11,15 @@ COLOR = [
     (150, 150, 0),
     (150, 0, 150),
     (0, 150, 150),
+    # add more colors here if needed
 ]
-N = 4
-NUM_COLOR = 6
-NUM_SHAPE = min(4, NUM_COLOR)
+
+N_GRID = 4
+NUM_COLOR = len(COLOR)
+# the number of objects presented in each image
+NUM_SHAPE = 4
+# avoid a color shared by more than one objects
+NUM_SHAPE = min(NUM_SHAPE, NUM_COLOR)
 NUM_Q = 5
 
 

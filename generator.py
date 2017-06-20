@@ -33,14 +33,14 @@ def generator(config):
     dataset_size = config.dataset_size
     dir_name = config.dir_name
 
-    block_size = int(img_size*0.9/N)
-    shape_size = int((img_size*0.9/N)*0.7/2)
+    block_size = int(img_size*0.9/N_GRID)
+    shape_size = int((img_size*0.9/N_GRID)*0.7/2)
 
     def generate_sample(img_size):
         # Generate I: [img_size, img_size, 3]
         img = Image.new('RGB', (img_size, img_size), color=BG_COLOR)
         drawer = ImageDraw.Draw(img)
-        idx_coor = np.arange(N*N)
+        idx_coor = np.arange(N_GRID*N_GRID)
         np.random.shuffle(idx_coor)
         idx_color_shape = np.arange(NUM_COLOR)
         np.random.shuffle(idx_color_shape)
@@ -48,8 +48,8 @@ def generator(config):
         X = []
         Y = []
         for i in range(NUM_SHAPE):
-            x = idx_coor[i] % N
-            y = (N - np.floor(idx_coor[i] / N) - 1).astype(np.uint8)
+            x = idx_coor[i] % NGRID_
+            y = (N_GRID - np.floor(idx_coor[i] / N_GRID) - 1).astype(np.uint8)
             # sqaure terms are added to remove ambiguity of distance
             position = ((x+0.5)*block_size-shape_size+x**2, (y+0.5)*block_size-shape_size+y**2,
                         (x+0.5)*block_size+shape_size+x**2, (y+0.5)*block_size+shape_size+y**2)
@@ -61,9 +61,7 @@ def generator(config):
                 drawer.rectangle(position, fill=COLOR[idx_color_shape[i]])
 
         # Generate its representation
-        # x = idx_coor[:NUM_SHAPE] % N
-        # y = np.floor(idx_coor[:NUM_SHAPE] / N).astype(np.uint8)
-        color = idx_color_shape[:NUM_SHAPE] % NUM_COLOR
+        color = idx_color_shape[:NUM_SHAPE]
         shape = coin < 0.5
         rep = Representation(np.stack(X).astype(np.int),
                              np.stack(Y).astype(np.int), color, shape)
@@ -90,7 +88,7 @@ def generator(config):
             else:
                 A[i*NUM_Q, NUM_COLOR+1] = True
 
-            # Q2: lower?
+            # Q2: bottom?
             if rep.y[i] > int(img_size/2):
                 A[i*NUM_Q+1, NUM_COLOR+2] = True
             else:
@@ -107,7 +105,7 @@ def generator(config):
             # Q4: the color of the nearest object
             min_idx = idx[1]
             A[i*NUM_Q+3, rep.color[min_idx]] = True
-            # Q5: the color of the farest object
+            # Q5: the color of the farthest object
             max_idx = idx[-1]
             A[i*NUM_Q+4, rep.color[max_idx]] = True
         return A

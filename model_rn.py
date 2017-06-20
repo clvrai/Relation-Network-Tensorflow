@@ -59,7 +59,6 @@ class Model(object):
 
     def build(self, is_train=True):
 
-        d = 4
         n = self.a_dim
         conv_info = self.conv_info
 
@@ -73,6 +72,12 @@ class Model(object):
             accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
             return tf.reduce_mean(loss), accuracy
         # }}}
+
+        def concat_coor(o, i, d):
+            coor = tf.tile(tf.expand_dims(
+                [float(int(i / d)) / d, (i % d) / d], axis=0), [self.batch_size, 1])
+            o = tf.concat([o, tf.to_float(coor)], axis=1)
+            return o
 
         def g_theta(o_i, o_j, q, scope='g_theta', reuse=True):
             with tf.variable_scope(scope, reuse=reuse) as scope:
@@ -95,17 +100,14 @@ class Model(object):
                 # eq.1 in the paper
                 # g_theta = (o_i, o_j, q)
                 # conv_4 [B, d, d, k]
+                d = conv_4.get_shape().as_list()[1]
                 all_g = []
                 for i in range(d*d):
                     o_i = conv_4[:, int(i / d), int(i % d), :]
-                    coor_i = tf.tile(tf.expand_dims(
-                        [float(int(i / d)) / d, (i % d) / d], axis=0), [self.batch_size, 1])
-                    o_i = tf.concat([o_i, tf.to_float(coor_i)], axis=1)
+                    o_i = concat_coor(o_i, i, d)
                     for j in range(d*d):
                         o_j = conv_4[:, int(j / d), int(j % d), :]
-                        coor_j = tf.tile(tf.expand_dims(
-                            [float(int(j / d)) / d, (j % d) / d], axis=0), [self.batch_size, 1])
-                        o_j = tf.concat([o_j, tf.to_float(coor_j)], axis=1)
+                        o_j = concat_coor(o_j, j, d)
                         if i == 0 and j == 0:
                             g_i_j = g_theta(o_i, o_j, q, reuse=False)
                         else:
@@ -141,7 +143,7 @@ class Model(object):
         try:
             tfplot.summary.plot_many('IQA/',
                                      draw_iqa, [self.img, self.q, self.a, self.all_preds],
-                                     max_outputs=3,
+                                     max_outputs=4,
                                      collections=["plot_summaries"])
         except:
             pass
