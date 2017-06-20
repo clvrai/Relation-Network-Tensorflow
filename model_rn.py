@@ -12,7 +12,7 @@ except:
 from ops import conv2d, fc
 from util import log
 
-from qa_util import question2str, answer2str
+from vqa_util import question2str, answer2str
 
 
 class Model(object):
@@ -78,17 +78,9 @@ class Model(object):
             with tf.variable_scope(scope, reuse=reuse) as scope:
                 if not reuse: log.warn(scope.name)
                 g_1 = fc(tf.concat([o_i, o_j, q], axis=1), 256, name='g_1')
-                # g_1 = slim.dropout(g_1, keep_prob=0.5, is_training=is_train, scope='g_1/')
-                if not reuse: print('{} {}'.format(scope.name, g_1))
                 g_2 = fc(g_1, 256, name='g_2')
-                # g_2 = slim.dropout(g_2, keep_prob=0.5, is_training=is_train, scope='g_2/')
-                if not reuse: print('{} {}'.format(scope.name, g_2))
                 g_3 = fc(g_2, 256, name='g_3')
-                # g_3 = slim.dropout(g_3, keep_prob=0.5, is_training=is_train, scope='g_3/')
-                if not reuse: print('{} {}'.format(scope.name, g_3))
                 g_4 = fc(g_3, 256, name='g_4')
-                # g_4 = slim.dropout(g_4, keep_prob=0.5, is_training=is_train, scope='g_4/')
-                if not reuse: print('{} {}'.format(scope.name, g_4))
                 return g_4
 
         # Classifier: takes images as input and outputs class label [B, m]
@@ -96,17 +88,9 @@ class Model(object):
             with tf.variable_scope(scope) as scope:
                 log.warn(scope.name)
                 conv_1 = conv2d(img, conv_info[0], is_train, s_h=3, s_w=3, name='conv_1')
-                # conv_1 = slim.dropout(conv_1, keep_prob=0.5, is_training=is_train, scope='conv_1/')
-                print('{} {}'.format(scope.name, conv_1))
                 conv_2 = conv2d(conv_1, conv_info[1], is_train, s_h=3, s_w=3, name='conv_2')
-                # conv_2 = slim.dropout(conv_2, keep_prob=0.5, is_training=is_train, scope='conv_2/')
-                print('{} {}'.format(scope.name, conv_2))
                 conv_3 = conv2d(conv_2, conv_info[2], is_train, name='conv_3')
-                # conv_3 = slim.dropout(conv_3, keep_prob=0.5, is_training=is_train, scope='conv_3/')
-                print('{} {}'.format(scope.name, conv_3))
                 conv_4 = conv2d(conv_3, conv_info[3], is_train, name='conv_4')
-                # conv_4 = slim.dropout(conv_4, keep_prob=0.5, is_training=is_train, scope='conv_4/')
-                print('{} {}'.format(scope.name, conv_4))
 
                 # eq.1 in the paper
                 # g_theta = (o_i, o_j, q)
@@ -130,19 +114,15 @@ class Model(object):
 
                 all_g = tf.stack(all_g, axis=0)
                 all_g = tf.reduce_mean(all_g, axis=0, name='all_g')
-                print('{} {}'.format(scope.name, all_g))
                 return all_g
 
         def f_phi(g, scope='f_phi'):
             with tf.variable_scope(scope) as scope:
                 log.warn(scope.name)
                 fc_1 = fc(g, 256, name='fc_1')
-                print('{} {}'.format(scope.name, fc_1))
                 fc_2 = fc(fc_1, 256, name='fc_2')
                 fc_2 = slim.dropout(fc_2, keep_prob=0.5, is_training=is_train, scope='fc_3/')
-                print('{} {}'.format(scope.name, fc_2))
                 fc_3 = fc(fc_2, n, activation_fn=None, name='fc_3')
-                print('{} {}'.format(scope.name, fc_3))
                 return fc_3
 
         g = CONV(self.img, self.q, scope='CONV')

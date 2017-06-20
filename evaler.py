@@ -7,7 +7,7 @@ from six.moves import xrange
 from util import log
 
 from input_ops import create_input_ops, check_data_id
-from qa_util import NUM_COLOR
+from vqa_util import NUM_COLOR
 
 import os
 import time

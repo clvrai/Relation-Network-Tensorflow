@@ -10,7 +10,7 @@ import argparse
 import progressbar
 
 from util import log
-from qa_util import *
+from vqa_util import *
 
 
 class Representation:

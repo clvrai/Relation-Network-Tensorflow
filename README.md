@@ -1,5 +1,9 @@
 # Relation Networks and Sort-of-CLEVR in Tensorflow
 
+As part of the implementation series of [Joseph Lim's group at USC](http://csail.mit.edu/~lim), our motivation is to accelerate (or sometimes delay) research in the AI community by promoting open-source projects. To this end, we implement state-of-the-art research papers, and publicly share them with concise reports. Please visit our [group github site](https://github.com/gitlimlab) for other projects.
+
+This project is implemented by [Shao-Hua Sun](http://shaohua0116.github.io).
+
 ## Descriptions
 This project includes a [Tensorflow](https://www.tensorflow.org/) implementation of **Relation Networks** and a synthetic VQA dataset named **Sort-of-CLEVR** proposed in the paper [A Simple Neural Network Module for Relational Reasoning](https://arxiv.org/abs/1706.01427).
 
@@ -72,7 +76,7 @@ Or generate your own Sort-of-CLEVR dataset by specifying args:
 $ python generator.py --dataset_size 12345 --img_size 256
 ```
 
-Or you can even change the number of shape presented in the images, the number of possible colors, types of questions and answers by configuring the file *qa_util.py*.
+Or you can even change the number of shape presented in the images, the number of possible colors, types of questions and answers by configuring the file *vqa_util.py*.
 
 ### Training
 

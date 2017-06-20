@@ -12,7 +12,7 @@ except:
 from ops import conv2d, fc
 from util import log
 
-from qa_util import question2str, answer2str
+from vqa_util import question2str, answer2str
 
 
 class Model(object):
@@ -78,25 +78,14 @@ class Model(object):
             with tf.variable_scope(scope) as scope:
                 log.warn(scope.name)
                 conv_1 = conv2d(img, conv_info[0], is_train, s_h=3, s_w=3, name='conv_1')
-                # conv_1 = slim.dropout(conv_1, keep_prob=0.5, is_training=is_train, scope='conv_1/')
-                print('{} {}'.format(scope.name, conv_1))
                 conv_2 = conv2d(conv_1, conv_info[1], is_train, s_h=3, s_w=3, name='conv_2')
-                # conv_2 = slim.dropout(conv_2, keep_prob=0.5, is_training=is_train, scope='conv_2/')
-                print('{} {}'.format(scope.name, conv_2))
                 conv_3 = conv2d(conv_2, conv_info[2], is_train, name='conv_3')
-                # conv_3 = slim.dropout(conv_3, keep_prob=0.5, is_training=is_train, scope='conv_3/')
-                print('{} {}'.format(scope.name, conv_3))
                 conv_4 = conv2d(conv_3, conv_info[3], is_train, name='conv_4')
-                # conv_4 = slim.dropout(conv_4, keep_prob=0.5, is_training=is_train, scope='conv_4/')
-                print('{} {}'.format(scope.name, conv_4))
                 conv_q = tf.concat([tf.reshape(conv_4, [self.batch_size, -1]), q], axis=1)
                 fc_1 = fc(conv_q, 256, name='fc_1')
-                print('{} {}'.format(scope.name, fc_1))
                 fc_2 = fc(fc_1, 256, name='fc_2')
                 fc_2 = slim.dropout(fc_2, keep_prob=0.5, is_training=is_train, scope='fc_3/')
-                print('{} {}'.format(scope.name, fc_2))
                 fc_3 = fc(fc_2, n, activation_fn=None, name='fc_3')
-                print('{} {}'.format(scope.name, fc_3))
                 return fc_3
 
         logits = C(self.img, self.q, scope='Classifier')
