@@ -11,11 +11,15 @@ This project includes a [Tensorflow](https://www.tensorflow.org/) implementation
 
 Relational reasoning is an essential component of intelligent systems. Motivated by this goal Relation Networks (RNs) are proposed to solve problems hinging on inherently relational concepts. To be more specific, RN is a composite function:
 
-<img src="figure/rn_eq.png" height="72" align="middle"/>,
+<p align="center">
+    <img src="figure/rn_eq.png" height="72"/>,
+</p>
 
 where *o* represents inidividual object while *f* and *g* are functions dealing with relational reasoning which are implemented as MLPs. Note that objects mentioned here are not necessary to be real objects; instead, they could consist of the background, particular physical objects, textures, conjunctions of physical objects, etc. In the implementation, objects are defined by convoluted features. The model architecture proposed to solve Visual Question Answering (VQA) problems is as follows.
 
-<img src="figure/RN.png" height="350" align="middle"/>
+<p align="center">
+    <img src="figure/RN.png" height="350"/>
+</p>
 
 In addition to the RN model, **a baseline model** which consists of convolutional layers followed by MLPs is also provided in this implementation. 
 
@@ -25,11 +29,15 @@ To verify the effectiveness of RNs, a synthesized **VQA dataset** is proposed in
 
 Each **image** has a number of shapes (rectangle or circle) which have different colors (red, blue, green, yellow, cyan,  or magenta). Here are some examples of images.
 
-<img src="figure/samples.png" width="720" align="middle"/>
+<p align="center">
+    <img src="figure/samples.png" width="720"/>
+</p>
 
 **Questions** are separated into relational and non-relational questions which are encoded as binary strings to prevent the effect of language parsing and embedding; while **answers** are represented as one-hot vectors. Examples of images, questions and answers are as follow.
 
-<img src="figure/iqa.png" width="850" align="middle"/>
+<p align="center">
+    <img src="figure/iqa.png" width="850"/>
+</p>
 
 Given a queried color, all the possible questions are as follows.
 
