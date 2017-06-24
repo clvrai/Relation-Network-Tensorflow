@@ -82,6 +82,7 @@ class Trainer(object):
 
         self.summary_op = tf.summary.merge_all()
         try:
+            import tfplot
             self.plot_summary_op = tf.summary.merge_all(key='plot_summaries')
         except:
             pass
@@ -163,8 +164,11 @@ class Trainer(object):
         )
         [step, accuracy, summary, loss] = fetch_values[:4]
 
-        if self.plot_summary_op in fetch:
-            summary += fetch_values[-1]
+        try:
+            if self.plot_summary_op in fetch:
+                summary += fetch_values[-1]
+        except:
+            pass
 
         _end_time = time.time()
 
