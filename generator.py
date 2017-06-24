@@ -48,7 +48,7 @@ def generator(config):
         X = []
         Y = []
         for i in range(NUM_SHAPE):
-            x = idx_coor[i] % NGRID_
+            x = idx_coor[i] % N_GRID
             y = (N_GRID - np.floor(idx_coor[i] / N_GRID) - 1).astype(np.uint8)
             # sqaure terms are added to remove ambiguity of distance
             position = ((x+0.5)*block_size-shape_size+x**2, (y+0.5)*block_size-shape_size+y**2,
