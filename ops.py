@@ -39,5 +39,5 @@ def conv2d(input, output_shape, is_train, activation_fn=tf.nn.relu,
 
 
 def fc(input, output_shape, activation_fn=tf.nn.relu, name="fc"):
-    output = slim.fully_connected(input, output_shape, activation_fn=activation_fn)
+    output = slim.fully_connected(input, int(output_shape), activation_fn=activation_fn)
     return output
