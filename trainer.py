@@ -115,7 +115,7 @@ class Trainer(object):
         self.ckpt_path = config.checkpoint
         if self.ckpt_path is not None:
             log.info("Checkpoint path: %s", self.ckpt_path)
-            self.pretrain_saver.restore(self.session, self.ckpt_path)
+            self.saver.restore(self.session, self.ckpt_path)
             log.info("Loaded the pretrain parameters from the provided checkpoint path")
 
     def train(self):
